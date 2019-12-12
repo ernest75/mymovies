@@ -1,14 +1,13 @@
-package com.example.mymovies
+package com.example.mymovies.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.antonioleiva.mymovies.ui.common.CoroutineScopeActivity
+import com.example.mymovies.R
 import com.example.mymovies.model.MovieDb
-import com.example.mymovies.ui.MoviesAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.karumi.dexter.Dexter
@@ -16,7 +15,6 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.single.BasePermissionListener
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
@@ -26,7 +24,10 @@ class MainActivity : CoroutineScopeActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val adapter = MoviesAdapter {
+        startActivity<DetailActivity> {
+            putExtra(DetailActivity.MOVIE, it)
         }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
