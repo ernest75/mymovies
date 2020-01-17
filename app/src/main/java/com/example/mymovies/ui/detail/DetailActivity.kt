@@ -1,13 +1,15 @@
-package com.example.mymovies.ui
+package com.example.mymovies.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.text.bold
 import com.example.mymovies.R
 import com.example.mymovies.model.Movie
+import com.example.mymovies.ui.loadUrl
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), DetailPresenter.View {
+
+    private val presenter = DetailPresenter()
 
     companion object {
         const val MOVIE = "DetailActivity:movie"
@@ -17,7 +19,17 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        with(intent.getParcelableExtra<Movie>(MOVIE)) {
+        presenter.onCreate(this, intent.getParcelableExtra<Movie>(MOVIE))
+
+    }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
+
+    override fun updateUi(movie: Movie) {
+        with(movie) {
             movieDetailToolbar.title = title
             movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780$backdropPath")
             movieDetailSummary.text = overview

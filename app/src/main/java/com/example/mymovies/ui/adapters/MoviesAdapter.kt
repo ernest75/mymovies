@@ -1,4 +1,4 @@
-package com.example.mymovies.ui
+package com.example.mymovies.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovies.R
 import com.example.mymovies.model.Movie
+import com.example.mymovies.ui.inflate
+import com.example.mymovies.ui.loadUrl
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_movie.view.*
 
