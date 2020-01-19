@@ -10,6 +10,8 @@ class MainPresenter(private val movieRepository: MovieRepository) : Scope by Sco
     interface View{
         fun updateData(movies: List<Movie>)
         fun navigateTo(movie: Movie)
+        fun showProgress()
+        fun hideProgress()
     }
 
     private var view: View? = null
@@ -18,8 +20,9 @@ class MainPresenter(private val movieRepository: MovieRepository) : Scope by Sco
         this.view = view
         initScope()
         launch {
+            view.showProgress()
             view.updateData(movieRepository.findPopularMovies().results)
-
+            view.hideProgress()
         }
 
     }

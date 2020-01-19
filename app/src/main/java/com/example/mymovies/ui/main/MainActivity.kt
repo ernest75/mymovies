@@ -1,6 +1,7 @@
 package com.example.mymovies.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
 import com.example.mymovies.R
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
         setContentView(R.layout.activity_main)
 
         presenter.onCreate(this)
-
         recycler.adapter = adapter
     }
 
@@ -43,6 +43,14 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
         startActivity<DetailActivity> {
             putExtra(DetailActivity.MOVIE, movie)
         }
+    }
+
+    override fun showProgress() {
+       progress.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progress.visibility = View.GONE
     }
 
 }
