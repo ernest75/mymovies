@@ -12,6 +12,7 @@ import com.example.mymovies.model.Movie
 import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.ui.detail.DetailActivity
 import com.example.mymovies.ui.adapters.MoviesAdapter
+import com.example.mymovies.ui.getViewModel
 import com.example.mymovies.ui.main.MainViewModel.*
 import com.example.mymovies.ui.main.MainViewModel.UiModel.*
 import com.example.mymovies.ui.startActivity
@@ -27,9 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProviders.of(this,
-            MainViewModelFactory(MovieRepository(this))
-        )[MainViewModel::class.java]
+        viewModel = getViewModel { MainViewModel(MovieRepository(this)) }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.model.observe(this, Observer (::updateUi))
     }
 
-    private fun updateUi(model: MainViewModel.UiModel){
+    private fun updateUi(model: UiModel){
         progress.visibility = if (model == Loading) View.VISIBLE else View.GONE
 
         when(model){
