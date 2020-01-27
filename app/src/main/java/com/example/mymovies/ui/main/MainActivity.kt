@@ -3,23 +3,18 @@ package com.example.mymovies.ui.main
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.os.Bundle
 import android.view.View
-import android.webkit.PermissionRequest
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.PermissionChecker
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 
 import com.example.mymovies.R
-import com.example.mymovies.model.Movie
 import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.ui.PermissionRequester
 import com.example.mymovies.ui.detail.DetailActivity
 import com.example.mymovies.ui.adapters.MoviesAdapter
-import com.example.mymovies.ui.getViewModel
+import com.example.mymovies.ui.common.getViewModel
 import com.example.mymovies.ui.main.MainViewModel.*
 import com.example.mymovies.ui.main.MainViewModel.UiModel.*
-import com.example.mymovies.ui.startActivity
+import com.example.mymovies.ui.common.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -39,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = adapter
 
         viewModel.model.observe(this, Observer (::updateUi))
+        viewModel.navigation.observe(this, Observer {
+            event -> event.getContentIfNotHandled()?.let {
+                startActivity<DetailActivity>{
+                    putExtra(DetailActivity.MOVIE, it)
+                }
+            }
+        })
     }
 
     private fun updateUi(model: UiModel){
@@ -46,9 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         when(model){
             is Content -> adapter.movies = model.movies
-            is Navigation -> startActivity<DetailActivity>{
-                putExtra(DetailActivity.MOVIE,model.movie)
-            }
             RequestLocationPermission -> coarsePermissionChecker.request {
                 viewModel.onCoarsePermissionRequested()
             }

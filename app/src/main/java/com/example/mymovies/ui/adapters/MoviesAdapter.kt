@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovies.R
 import com.example.mymovies.model.Movie
-import com.example.mymovies.ui.inflate
-import com.example.mymovies.ui.loadUrl
+import com.example.mymovies.ui.common.inflate
+import com.example.mymovies.ui.common.loadUrl
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_movie.view.*
 
