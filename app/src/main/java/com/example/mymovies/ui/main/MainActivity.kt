@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 
 import com.example.mymovies.R
 import com.example.mymovies.model.MovieRepository
-import com.example.mymovies.ui.PermissionRequester
+import com.example.mymovies.PermissionRequester
 import com.example.mymovies.ui.detail.DetailActivity
 import com.example.mymovies.ui.adapters.MoviesAdapter
 import com.example.mymovies.ui.common.getViewModel
@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel : MainViewModel
     private lateinit var adapter : MoviesAdapter
-    private val coarsePermissionChecker = PermissionRequester(this,ACCESS_COARSE_LOCATION)
+    private val coarsePermissionChecker =
+        PermissionRequester(this, ACCESS_COARSE_LOCATION)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
