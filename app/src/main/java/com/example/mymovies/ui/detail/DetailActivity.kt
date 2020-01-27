@@ -3,11 +3,9 @@ package com.example.mymovies.ui.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.mymovies.R
-import com.example.mymovies.model.Movie
-import com.example.mymovies.ui.getViewModel
-import com.example.mymovies.ui.loadUrl
+import com.example.mymovies.ui.common.getViewModel
+import com.example.mymovies.ui.common.loadUrl
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity(){
