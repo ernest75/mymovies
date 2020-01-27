@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mymovies.R
 import com.example.mymovies.model.Movie
+import com.example.mymovies.ui.getViewModel
 import com.example.mymovies.ui.loadUrl
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -20,9 +21,7 @@ class DetailActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        viewModel = ViewModelProviders.of(
-            this,
-            DetailViewModel.DetailViewModelFactory(intent.getParcelableExtra(MOVIE)))[DetailViewModel::class.java]
+        viewModel = getViewModel { DetailViewModel(intent.getParcelableExtra(MOVIE)) }
 
         viewModel.model.observe(this, Observer(::updateUi))
 
