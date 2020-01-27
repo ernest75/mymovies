@@ -17,6 +17,7 @@ class MainViewModel(private val movieRepository: MovieRepository) : ViewModel(),
         object Loading : UiModel()
         class Content(val movies: List<Movie>) : UiModel()
         class Navigation (val movie: Movie) : UiModel()
+        object RequestLocationPermission : UiModel()
     }
 
     private val _model = MutableLiveData<UiModel>()
@@ -31,6 +32,10 @@ class MainViewModel(private val movieRepository: MovieRepository) : ViewModel(),
     }
 
   private fun refresh() {
+        _model.value = UiModel.RequestLocationPermission
+    }
+
+    fun onCoarsePermissionRequested() {
         launch {
             _model.value = Loading
             _model.value = Content(movieRepository.findPopularMovies().results)

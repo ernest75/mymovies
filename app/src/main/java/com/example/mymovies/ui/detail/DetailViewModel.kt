@@ -18,6 +18,4 @@ class DetailViewModel (private val movie : Movie) : ViewModel()  {
         return _model
     }
 
-
-
 }
