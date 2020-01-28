@@ -1,12 +1,11 @@
-package com.example.mymovies.ui
+package com.example.mymovies.ui.detail
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.example.mymovies.model.Movie
-import java.util.jar.Attributes
+import com.example.mymovies.database.Movie
 
 class MovieDetailInfoView @JvmOverloads constructor(
     context: Context,

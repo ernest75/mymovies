@@ -1,22 +1,20 @@
 package com.example.mymovies.ui.main
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.mymovies.model.Movie
+import com.example.mymovies.database.Movie
 import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.ui.common.Event
 import com.example.mymovies.ui.common.Scope
+import com.example.mymovies.ui.common.ScopedViewModel
 import com.example.mymovies.ui.main.MainViewModel.UiModel.*
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val movieRepository: MovieRepository) : ViewModel(),
-    Scope by Scope.Impl() {
+class MainViewModel(private val movieRepository: MovieRepository) : ScopedViewModel() {
 
     sealed class UiModel{
         object Loading : UiModel()
         class Content(val movies: List<Movie>) : UiModel()
+        class Navigation(val movie: Movie) : UiModel()
         object RequestLocationPermission : UiModel()
     }
 
@@ -26,9 +24,6 @@ class MainViewModel(private val movieRepository: MovieRepository) : ViewModel(),
             if (_model.value == null) refresh()
             return _model
         }
-
-    private val _navigation = MutableLiveData<Event<Movie>>()
-    val navigation : LiveData<Event<Movie>> = _navigation
 
     init {
         initScope()
@@ -41,17 +36,18 @@ class MainViewModel(private val movieRepository: MovieRepository) : ViewModel(),
     fun onCoarsePermissionRequested() {
         launch {
             _model.value = Loading
-            _model.value = Content(movieRepository.findPopularMovies().results)
+            _model.value = Content(movieRepository.findPopularMovies())
         }
 
     }
 
     fun onMovieClicked(movie: Movie) {
-       _navigation.value = Event(movie)
+        _model.value = UiModel.Navigation(movie)
     }
 
     override fun onCleared() {
-        cancelScope()
+        destroyScope()
+        super.onCleared()
     }
 
 

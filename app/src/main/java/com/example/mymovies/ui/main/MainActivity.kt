@@ -11,6 +11,7 @@ import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.PermissionRequester
 import com.example.mymovies.ui.detail.DetailActivity
 import com.example.mymovies.ui.adapters.MoviesAdapter
+import com.example.mymovies.ui.common.app
 import com.example.mymovies.ui.common.getViewModel
 import com.example.mymovies.ui.main.MainViewModel.*
 import com.example.mymovies.ui.main.MainViewModel.UiModel.*
@@ -29,30 +30,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = getViewModel { MainViewModel(MovieRepository(application)) }
+        viewModel = getViewModel { MainViewModel(MovieRepository(app)) }
 
         adapter = MoviesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter
 
         viewModel.model.observe(this, Observer (::updateUi))
-        viewModel.navigation.observe(this, Observer {
-            event -> event.getContentIfNotHandled()?.let {
-                startActivity<DetailActivity>{
-                    putExtra(DetailActivity.MOVIE, it)
-                }
-            }
-        })
+
     }
 
-    private fun updateUi(model: UiModel){
-        progress.visibility = if (model == Loading) View.VISIBLE else View.GONE
+    private fun updateUi(model: UiModel) {
 
-        when(model){
-            is Content -> adapter.movies = model.movies
-            RequestLocationPermission -> coarsePermissionChecker.request {
+        progress.visibility = if (model is UiModel.Loading) View.VISIBLE else View.GONE
+
+        when (model) {
+            is UiModel.Content -> adapter.movies = model.movies
+            is UiModel.Navigation -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.MOVIE, model.movie.id)
+            }
+            UiModel.RequestLocationPermission -> coarsePermissionChecker.request {
                 viewModel.onCoarsePermissionRequested()
             }
         }
     }
+
+
 
 }
