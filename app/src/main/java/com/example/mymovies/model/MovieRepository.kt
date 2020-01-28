@@ -23,7 +23,6 @@ class MovieRepository(application: MoviesApp) {
                   .listPopularMoviesAsync(apiKey, regionRepository.findLastRegion())
                   .await()
                   .results
-              //TODO CODI DIFERENT MIRAR PQUE
               insertMovies(movies.map { it.convertToDbMovie() })
           }
 
@@ -34,6 +33,10 @@ class MovieRepository(application: MoviesApp) {
 
     suspend fun findById(id: Int): DbMovie = withContext(Dispatchers.IO) {
         db.movieDao().findById(id)
+    }
+
+    suspend fun updateMovie(movie: DbMovie) = withContext(Dispatchers.IO){
+        db.movieDao().updateMovie(movie)
     }
 
 
