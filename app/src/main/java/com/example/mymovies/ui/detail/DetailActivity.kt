@@ -2,6 +2,7 @@ package com.example.mymovies.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import com.example.mymovies.R
 import com.example.mymovies.model.MovieRepository
@@ -27,6 +28,8 @@ class DetailActivity : AppCompatActivity(){
 
         viewModel.model.observe(this, Observer(::updateUi))
 
+        movieDetailFavorite.setOnClickListener{viewModel.onFavouriteClicked()}
+
     }
 
 
@@ -35,6 +38,9 @@ class DetailActivity : AppCompatActivity(){
             movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780$backdropPath")
             movieDetailSummary.text = overview
             movieDetailInfo.setMovie(this)
+
+            val icon = if (favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
+            movieDetailFavorite.setImageDrawable(getDrawable(icon))
 
         }
     }

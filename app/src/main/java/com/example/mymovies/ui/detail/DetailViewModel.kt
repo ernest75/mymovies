@@ -27,4 +27,13 @@ class DetailViewModel (private val movieId: Int, private val moviesRepository: M
         }
     }
 
+    fun onFavouriteClicked()= launch {
+            _model.value?.movie?.let {
+                val updatedMovie = it.copy(favorite = !it.favorite)
+                _model.value = UiModel(updatedMovie)
+                moviesRepository.updateMovie(updatedMovie)
+            }
+        }
+
+
 }
