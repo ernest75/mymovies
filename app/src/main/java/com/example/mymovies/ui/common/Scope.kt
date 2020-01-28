@@ -8,6 +8,11 @@ import kotlin.coroutines.CoroutineContext
 
 interface Scope: CoroutineScope {
 
+    class Impl : Scope{
+        override lateinit var job: Job
+
+    }
+
     var job: Job
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
@@ -16,13 +21,10 @@ interface Scope: CoroutineScope {
         job = SupervisorJob()
     }
 
-    fun cancelScope() {
+    fun destroyScope() {
         job.cancel() // Cancel job on activity destroy. After destroy all children jobs will be cancelled automatically
     }
 
-    class Impl : Scope{
-        override lateinit var job: Job
 
-    }
 
 }
