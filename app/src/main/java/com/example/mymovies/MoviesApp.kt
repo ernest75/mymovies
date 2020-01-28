@@ -3,6 +3,7 @@ package com.example.mymovies
 import android.app.Application
 import androidx.room.Room
 import com.example.mymovies.database.MovieDatabase
+import com.facebook.stetho.Stetho
 
 class MoviesApp : Application() {
 
@@ -16,5 +17,7 @@ class MoviesApp : Application() {
             this,
             MovieDatabase::class.java, "movie-db"
         ).build()
+
+        Stetho.initializeWithDefaults(this);
     }
 }
