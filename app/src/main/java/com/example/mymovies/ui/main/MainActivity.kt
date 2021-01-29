@@ -16,6 +16,7 @@ import com.example.mymovies.ui.common.getViewModel
 import com.example.mymovies.ui.main.MainViewModel.*
 import com.example.mymovies.ui.main.MainViewModel.UiModel.*
 import com.example.mymovies.ui.common.startActivity
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 

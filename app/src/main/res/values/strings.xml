@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Movies</string>
     <string name="api_key">0e2a1d50c315a2ab2798b05faba7ef31</string>
+    <string name="c_d_favourite_button">Button for mark movie as favourite</string>
 </resources>

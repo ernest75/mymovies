@@ -1,5 +1,6 @@
 package com.example.mymovies.model
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.location.Location
 import com.google.android.gms.location.LocationServices
@@ -13,6 +14,7 @@ interface LocationDataSource {
 class PlayServiceLocationDataSource(application: Application) : LocationDataSource{
     private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
 
+    @SuppressLint("MissingPermission")
     override suspend fun findLastLocation(): Location? =
         suspendCancellableCoroutine { continuation ->
             fusedLocationClient.lastLocation
