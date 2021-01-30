@@ -18,6 +18,7 @@ import com.example.mymovies.ui.main.MainViewModel.UiModel.*
 import com.example.mymovies.ui.common.startActivity
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
