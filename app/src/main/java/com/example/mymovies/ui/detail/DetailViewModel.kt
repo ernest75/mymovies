@@ -21,7 +21,7 @@ class DetailViewModel (private val movieId: Int, private val moviesRepository: M
             return _model
         }
 
-    private fun findMovie() {
+    fun findMovie() {
         launch {
             _model.value = UiModel(moviesRepository.findById(movieId))
         }
