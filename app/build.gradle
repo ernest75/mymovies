@@ -33,6 +33,10 @@ androidExtensions {
     experimental = true
 }
 
+ext{
+    room_version = "2.2.6"
+}
+
 dependencies {
     implementation project(":data")
     implementation project(":domain")
@@ -44,7 +48,8 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation 'com.google.android.material:material:1.2.1'
-    def room_version = "2.2.6"
+
+    //Room version
     implementation "androidx.room:room-runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
 
