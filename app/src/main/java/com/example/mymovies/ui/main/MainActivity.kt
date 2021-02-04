@@ -50,10 +50,9 @@ class MainActivity : AppCompatActivity() {
                 putExtra(MOVIE, model.movie.id)
             }
             UiModel.RequestLocationPermission -> coarsePermissionChecker.request {
-                if (it) viewModel.onCoarsePermissionRequested()
-                else Timber.e("Permission denied")
+                viewModel.onCoarsePermissionRequested()
 
-            };
+            }
         }
     }
 
