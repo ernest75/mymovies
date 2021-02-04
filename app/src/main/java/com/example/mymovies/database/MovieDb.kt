@@ -1,5 +1,6 @@
-package com.example.mymovies.model
+package com.example.mymovies.database
 
+import com.example.mymovies.model.TheMovieDbService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,6 +21,7 @@ object MovieDb {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .run {
-            create<TheMovieDbService>(TheMovieDbService::class.java)
+            create<TheMovieDbService>(
+                TheMovieDbService::class.java)
         }
 }
