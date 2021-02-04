@@ -11,6 +11,7 @@ import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.PermissionRequester
 import com.example.mymovies.ui.detail.DetailActivity
 import com.example.mymovies.ui.adapters.MoviesAdapter
+import com.example.mymovies.ui.common.Constants.MOVIE
 import com.example.mymovies.ui.common.app
 import com.example.mymovies.ui.common.getViewModel
 import com.example.mymovies.ui.main.MainViewModel.*
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         when (model) {
             is UiModel.Content -> adapter.movies = model.movies
             is UiModel.Navigation -> startActivity<DetailActivity> {
-                putExtra(DetailActivity.MOVIE, model.movie.id)
+                putExtra(MOVIE, model.movie.id)
             }
             UiModel.RequestLocationPermission -> coarsePermissionChecker.request {
                 viewModel.onCoarsePermissionRequested()

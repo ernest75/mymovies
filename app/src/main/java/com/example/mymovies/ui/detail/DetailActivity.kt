@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import com.example.mymovies.R
 import com.example.mymovies.model.MovieRepository
+import com.example.mymovies.ui.common.Constants.MOVIE
 import com.example.mymovies.ui.common.app
 import com.example.mymovies.ui.common.getViewModel
 import com.example.mymovies.ui.common.loadUrl
@@ -16,10 +17,6 @@ import kotlinx.android.synthetic.main.view_movie.*
 class DetailActivity : AppCompatActivity(){
 
     private lateinit var viewModel: DetailViewModel
-
-    companion object {
-        const val MOVIE = "DetailActivity:movie"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +29,7 @@ class DetailActivity : AppCompatActivity(){
 
         movieDetailFavorite.setOnClickListener{viewModel.onFavouriteClicked()}
 
-
     }
-
 
     private fun updateUi(model: DetailViewModel.UiModel) = with(model.movie) {
         movieDetailToolbar.setNavigationIcon(R.drawable.ic_arrow_back)

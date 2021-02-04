@@ -2,7 +2,6 @@ package com.example.mymovies.model
 
 import com.example.mymovies.MoviesApp
 import com.example.mymovies.R
-import com.example.mymovies.database.MovieDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.example.mymovies.database.Movie as DbMovie

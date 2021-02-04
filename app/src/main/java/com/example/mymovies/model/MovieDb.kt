@@ -1,6 +1,5 @@
-package com.example.mymovies.database
+package com.example.mymovies.model
 
-import com.example.mymovies.model.TheMovieDbService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
