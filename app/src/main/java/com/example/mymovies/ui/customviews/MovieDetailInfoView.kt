@@ -1,8 +1,7 @@
-package com.example.mymovies.ui.detail
+package com.example.mymovies.ui.customviews
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.TextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import com.example.mymovies.database.Movie

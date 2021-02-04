@@ -1,4 +1,4 @@
-package com.example.mymovies.ui.common
+package com.example.mymovies.ui.customviews
 
 import android.content.Context
 import android.util.AttributeSet
@@ -11,13 +11,16 @@ class AspectRatioImageView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
-    private var ratio: Float = DEFAULT_RATIO
+    private var ratio: Float =
+        DEFAULT_RATIO
 
     init {
         attrs?.let {
             val a = context.obtainStyledAttributes(attrs, R.styleable.AspectRatioImageView)
             with(a) {
-                ratio = getFloat(R.styleable.AspectRatioImageView_ratio, DEFAULT_RATIO)
+                ratio = getFloat(R.styleable.AspectRatioImageView_ratio,
+                    DEFAULT_RATIO
+                )
                 recycle()
             }
         }
