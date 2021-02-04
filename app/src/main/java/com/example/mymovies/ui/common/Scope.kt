@@ -10,7 +10,6 @@ interface Scope: CoroutineScope {
 
     class Impl : Scope{
         override lateinit var job: Job
-
     }
 
     var job: Job
