@@ -8,16 +8,14 @@ import androidx.lifecycle.Observer
 
 import com.example.mymovies.R
 import com.example.mymovies.model.MovieRepository
-import com.example.mymovies.PermissionRequester
+import com.example.mymovies.ui.common.PermissionRequester
 import com.example.mymovies.ui.detail.DetailActivity
 import com.example.mymovies.ui.adapters.MoviesAdapter
 import com.example.mymovies.ui.common.Constants.MOVIE
 import com.example.mymovies.ui.common.app
 import com.example.mymovies.ui.common.getViewModel
 import com.example.mymovies.ui.main.MainViewModel.*
-import com.example.mymovies.ui.main.MainViewModel.UiModel.*
 import com.example.mymovies.ui.common.startActivity
-import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
@@ -52,8 +50,10 @@ class MainActivity : AppCompatActivity() {
                 putExtra(MOVIE, model.movie.id)
             }
             UiModel.RequestLocationPermission -> coarsePermissionChecker.request {
-                viewModel.onCoarsePermissionRequested()
-            }
+                if (it) viewModel.onCoarsePermissionRequested()
+                else Timber.e("Permission denied")
+
+            };
         }
     }
 

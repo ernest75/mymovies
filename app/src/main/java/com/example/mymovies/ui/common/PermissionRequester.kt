@@ -1,4 +1,4 @@
-package com.example.mymovies
+package com.example.mymovies.ui.common
 
 import android.app.Activity
 import com.karumi.dexter.Dexter

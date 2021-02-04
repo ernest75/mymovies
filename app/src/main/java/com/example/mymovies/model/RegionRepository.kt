@@ -7,15 +7,12 @@ import android.app.Activity
 import android.app.Application
 import android.location.Geocoder
 import android.location.Location
+import com.example.mymovies.ui.common.Constants.DEFAULT_REGION
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
 class RegionRepository(application: Application) {
-
-    companion object{
-        private const val DEFAULT_REGION = "US"
-    }
 
     private val locationDataSource = PlayServiceLocationDataSource(application)
     private val coarsePermissionChecker = PermisionChecker(application,ACCESS_COARSE_LOCATION)

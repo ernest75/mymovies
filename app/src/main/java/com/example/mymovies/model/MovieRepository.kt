@@ -16,18 +16,15 @@ class MovieRepository(application: MoviesApp) {
     suspend fun findPopularMovies(): List<DbMovie> = withContext(Dispatchers.IO){
         with(db.movieDao()){
           if (movieCount()<= 0){
-
               val movies = MovieDb.service
                   .listPopularMoviesAsync(apiKey, regionRepository.findLastRegion())
                   .await()
                   .results
               insertMovies(movies.map { it.convertToDbMovie() })
           }
-
             getAll()
         }
     }
-
 
     suspend fun findById(id: Int): DbMovie = withContext(Dispatchers.IO) {
         db.movieDao().findById(id)
