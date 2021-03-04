@@ -6,43 +6,42 @@ import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.ui.common.Event
 import com.example.mymovies.ui.common.Scope
 import com.example.mymovies.ui.common.ScopedViewModel
-import com.example.mymovies.ui.main.MainViewModel.UiModel.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val movieRepository: MovieRepository) : ScopedViewModel() {
 
-    sealed class UiModel{
-        object Loading : UiModel()
-        class Content(val movies: List<Movie>) : UiModel()
-        class Navigation(val movie: Movie) : UiModel()
-        object RequestLocationPermission : UiModel()
-    }
+    private val _movies = MutableLiveData<List<Movie>>()
+    val movies: LiveData<List<Movie>> get() = _movies
 
-    private val _model = MutableLiveData<UiModel>()
-    val model : LiveData<UiModel>
-        get() {
-            if (_model.value == null) refresh()
-            return _model
-        }
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
+    private val _navigateToMovie = MutableLiveData<Event<Int>>()
+    val navigateToMovie: LiveData<Event<Int>> get() = _navigateToMovie
+
+    private val _requestLocationPermission = MutableLiveData<Event<Unit>>()
+    val requestLocationPermission: LiveData<Event<Unit>> get() = _requestLocationPermission
 
     init {
         initScope()
+        refresh()
     }
 
   private fun refresh() {
-        _model.value = UiModel.RequestLocationPermission
+      _requestLocationPermission.value = Event(Unit)
     }
 
     fun onCoarsePermissionRequested() {
         launch {
-            _model.value = Loading
-            _model.value = Content(movieRepository.findPopularMovies())
+            _loading.value = true
+            _movies.value = movieRepository.findPopularMovies()
+            _loading.value = false
         }
 
     }
 
     fun onMovieClicked(movie: Movie) {
-        _model.value = UiModel.Navigation(movie)
+        _navigateToMovie.value = Event(movie.id)
     }
 
     override fun onCleared() {
