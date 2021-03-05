@@ -2,16 +2,21 @@ package com.example.mymovies.ui.adapters
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.mymovies.R
 import com.example.mymovies.database.Movie
+import com.example.mymovies.ui.common.Constants
 import com.example.mymovies.ui.common.inflate
 import com.example.mymovies.ui.common.loadUrl
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_movie.view.*
 
-class MoviesAdapter(private val listener: (Movie) -> Unit) :
+class MoviesAdapter() :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     var movies: List<Movie> by Delegates.observable(emptyList()) { _, old, new ->
@@ -38,13 +43,29 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)
-        holder.itemView.setOnClickListener { listener(movie) }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+   inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val movieImageView:ImageView = itemView.movieCover
+        private val llRvItemMovie :LinearLayout = itemView.ll_movie_view_rv
+
         fun bind(movie: Movie) {
             itemView.movieTitle.text = movie.title
-            itemView.movieCover.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
+            itemView.movieCover.apply {
+                transitionName = Constants.BASE_URL_PATH + movie.posterPath
+                Glide.with(context)
+                    .load(transitionName)
+                    .into(this)
+            }
+
+            llRvItemMovie.setOnClickListener {
+                movieSelectedListener.onMovieSelected(movie, movieImageView)
+            }
         }
     }
+
+    interface MovieSelectedListener {
+        fun onMovieSelected(movie: Movie, imageView: ImageView)
+    }
+    lateinit var movieSelectedListener: MoviesAdapter.MovieSelectedListener
 }

@@ -12,28 +12,43 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel (private val movieId: Int, private val moviesRepository: MovieRepository) :ScopedViewModel() {
 
-    class UiModel(val movie: Movie)
+    private val _movie = MutableLiveData<Movie>()
+    val movie: LiveData<Movie> get() = _movie
 
-    private val _model = MutableLiveData<UiModel>()
-    val model: LiveData<UiModel>
-        get() {
-            if (_model.value == null) findMovie()
-            return _model
-        }
+    private val _title = MutableLiveData<String>()
+    val title: LiveData<String> get() = _title
 
-    private fun findMovie() {
+    private val _overview = MutableLiveData<String>()
+    val overview: LiveData<String> get() = _overview
+
+    private val _favorite = MutableLiveData<Boolean>()
+    val favorite: LiveData<Boolean> get() = _favorite
+
+    init {
         launch {
-            _model.value = UiModel(moviesRepository.findById(movieId))
+            _movie.value = moviesRepository.findById(movieId)
+            updateUi()
         }
     }
 
-    fun onFavouriteClicked()= launch {
-            _model.value?.movie?.let {
+    fun onFavoriteClicked() {
+        launch {
+            movie.value?.let {
                 val updatedMovie = it.copy(favorite = !it.favorite)
-                _model.value = UiModel(updatedMovie)
+                _movie.value = updatedMovie
+                updateUi()
                 moviesRepository.updateMovie(updatedMovie)
             }
         }
+    }
+
+    private fun updateUi() {
+        movie.value?.run {
+            _title.value = title
+            _overview.value = overview
+            _favorite.value = favorite
+        }
+    }
 
 
 }
