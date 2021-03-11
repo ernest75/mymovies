@@ -8,8 +8,9 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.Movie
 import com.example.mymovies.R
-import com.example.mymovies.database.Movie
+
 import com.example.mymovies.ui.adapters.MoviesAdapter
 import com.example.mymovies.ui.common.loadUrl
 import com.google.android.material.floatingactionbutton.FloatingActionButton

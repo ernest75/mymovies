@@ -7,23 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.example.data.repository.MoviesRepository
+import com.example.data.repository.RegionRepository
+import com.example.domain.Movie
 import com.example.mymovies.R
-import com.example.mymovies.database.Movie
+import com.example.mymovies.data.AndroidPermissionChecker
+import com.example.mymovies.data.PlayServicesLocationDataSource
+
+import com.example.mymovies.data.database.RoomDataSource
+import com.example.mymovies.data.server.TheMovieDbDataSource
 import com.example.mymovies.databinding.FragmentMainBinding
-import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.ui.adapters.MoviesAdapter
 import com.example.mymovies.ui.common.*
-import com.example.mymovies.ui.detail.DetailViewModel
+import com.example.usecases.GetPopularMovies
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.view_movie.*
-import timber.log.Timber
 
 class MainFragment : Fragment() {
 
@@ -53,7 +56,21 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = view.findNavController()
 
-        viewModel = getViewModel { MainViewModel(MovieRepository(app)) }
+        viewModel = getViewModel {
+            MainViewModel(
+                GetPopularMovies(
+                    MoviesRepository(
+                        RoomDataSource(app.db),
+                        TheMovieDbDataSource(),
+                        RegionRepository(
+                            PlayServicesLocationDataSource(app),
+                            AndroidPermissionChecker(app)
+                        ),
+                        getString(R.string.api_key)
+                    )
+                )
+            )
+        }
 
         viewModel.navigateToMovie.observe(viewLifecycleOwner, EventObserver { id ->
             val extras = FragmentNavigatorExtras(movieCover to "imageView")
@@ -70,6 +87,7 @@ class MainFragment : Fragment() {
         adapter = MoviesAdapter()
         adapter.movieSelectedListener = object : MoviesAdapter.MovieSelectedListener{
             override fun onMovieSelected(movie: Movie, imageView: ImageView) {
+                //TODO extract to constant
                 val pass = "https://image.tmdb.org/t/p/w185/${movie.posterPath}"
                 val extras = FragmentNavigatorExtras(
                     imageView to pass
