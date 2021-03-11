@@ -13,10 +13,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
+import com.example.data.repository.MoviesRepository
+import com.example.data.repository.RegionRepository
 import com.example.mymovies.R
+import com.example.mymovies.data.AndroidPermissionChecker
+import com.example.mymovies.data.PlayServicesLocationDataSource
+import com.example.mymovies.data.database.RoomDataSource
+import com.example.mymovies.data.server.TheMovieDbDataSource
 import com.example.mymovies.databinding.FragmentDetailBinding
-import com.example.mymovies.model.MovieRepository
 import com.example.mymovies.ui.common.*
+import com.example.usecases.FindMovieById
+import com.example.usecases.ToggleMovieFavorite
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -62,7 +69,21 @@ class DetailFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = getViewModel {
-            DetailViewModel(args.id, MovieRepository(app))
+            val moviesRepository = MoviesRepository(
+                RoomDataSource(app.db),
+                TheMovieDbDataSource(),
+                RegionRepository(
+                    PlayServicesLocationDataSource(app),
+                    AndroidPermissionChecker(app)
+                ),
+                getString(R.string.api_key)
+            )
+
+            DetailViewModel(
+                args.id,
+                FindMovieById(moviesRepository),
+                ToggleMovieFavorite(moviesRepository)
+            )
         }
 
         binding!!.movieDetailImage.apply {

@@ -1,4 +1,4 @@
-package com.example.mymovies.model
+package com.example.mymovies.data.server
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -14,7 +14,7 @@ data class MovieDbResult(
 @Parcelize
 data class Movie(
     val adult: Boolean,
-    @SerializedName("backdrop_path") val backdropPath: String,
+    @SerializedName("backdrop_path") val backdropPath: String?,
     @SerializedName("genre_ids") val genreIds: List<Int>,
     val id: Int,
     @SerializedName("original_language") val originalLanguage: String,

@@ -7,12 +7,10 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.example.domain.Movie
 import com.example.mymovies.R
-import com.example.mymovies.database.Movie
 import com.example.mymovies.ui.common.Constants
 import com.example.mymovies.ui.common.inflate
-import com.example.mymovies.ui.common.loadUrl
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_movie.view.*
 

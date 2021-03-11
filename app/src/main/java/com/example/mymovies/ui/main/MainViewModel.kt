@@ -1,14 +1,13 @@
 package com.example.mymovies.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mymovies.database.Movie
-import com.example.mymovies.model.MovieRepository
+import com.example.domain.Movie
 import com.example.mymovies.ui.common.Event
-import com.example.mymovies.ui.common.Scope
 import com.example.mymovies.ui.common.ScopedViewModel
+import com.example.usecases.GetPopularMovies
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val movieRepository: MovieRepository) : ScopedViewModel() {
+class MainViewModel(private val getPopularMovies: GetPopularMovies) : ScopedViewModel() {
 
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> get() = _movies
@@ -34,7 +33,7 @@ class MainViewModel(private val movieRepository: MovieRepository) : ScopedViewMo
     fun onCoarsePermissionRequested() {
         launch {
             _loading.value = true
-            _movies.value = movieRepository.findPopularMovies()
+            _movies.value = getPopularMovies.invoke()
             _loading.value = false
         }
 
