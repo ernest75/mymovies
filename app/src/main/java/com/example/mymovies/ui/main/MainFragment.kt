@@ -72,9 +72,12 @@ class MainFragment : Fragment() {
             )
         }
 
-        viewModel.navigateToMovie.observe(viewLifecycleOwner, EventObserver { id ->
-            val extras = FragmentNavigatorExtras(movieCover to "imageView")
-            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(id)
+        viewModel.navigateToMovie.observe(viewLifecycleOwner, EventObserver { navigationEvent ->
+            val pass = "https://image.tmdb.org/t/p/w185/${navigationEvent.movie.posterPath}"
+            val extras = FragmentNavigatorExtras(
+                navigationEvent.imageView to pass
+            )
+            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(navigationEvent.movie.id,pass)
             navController.navigate(action,extras)
         })
 
@@ -84,19 +87,7 @@ class MainFragment : Fragment() {
             }
         })
 
-        adapter = MoviesAdapter()
-        adapter.movieSelectedListener = object : MoviesAdapter.MovieSelectedListener{
-            override fun onMovieSelected(movie: Movie, imageView: ImageView) {
-                //TODO extract to constant
-                val pass = "https://image.tmdb.org/t/p/w185/${movie.posterPath}"
-                val extras = FragmentNavigatorExtras(
-                    imageView to pass
-                )
-                val action = MainFragmentDirections.actionMainFragmentToDetailFragment(movie.id,pass)
-                findNavController().navigate(action,extras)
-            }
-
-        }
+        adapter = MoviesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter
 
         binding?.apply {

@@ -1,4 +1,5 @@
 package com.example.mymovies.ui.main
+import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.domain.Movie
@@ -15,8 +16,8 @@ class MainViewModel(private val getPopularMovies: GetPopularMovies) : ScopedView
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
-    private val _navigateToMovie = MutableLiveData<Event<Int>>()
-    val navigateToMovie: LiveData<Event<Int>> get() = _navigateToMovie
+    private val _navigateToMovie = MutableLiveData<Event<NavigateEvent>>()
+    val navigateToMovie: LiveData<Event<NavigateEvent>> get() = _navigateToMovie
 
     private val _requestLocationPermission = MutableLiveData<Event<Unit>>()
     val requestLocationPermission: LiveData<Event<Unit>> get() = _requestLocationPermission
@@ -39,8 +40,8 @@ class MainViewModel(private val getPopularMovies: GetPopularMovies) : ScopedView
 
     }
 
-    fun onMovieClicked(movie: Movie) {
-        _navigateToMovie.value = Event(movie.id)
+    fun onMovieClicked(movie: Movie, imageView: ImageView) {
+        _navigateToMovie.value = Event(NavigateEvent(movie,imageView))
     }
 
     override fun onCleared() {
@@ -50,3 +51,5 @@ class MainViewModel(private val getPopularMovies: GetPopularMovies) : ScopedView
 
 
 }
+
+data class NavigateEvent (val movie: Movie,val imageView: ImageView)

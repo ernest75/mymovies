@@ -14,7 +14,7 @@ import com.example.mymovies.ui.common.inflate
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_movie.view.*
 
-class MoviesAdapter() :
+class MoviesAdapter(private val listener: (Movie, ImageView) -> Unit) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     var movies: List<Movie> by Delegates.observable(emptyList()) { _, old, new ->
@@ -41,6 +41,7 @@ class MoviesAdapter() :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movies[position]
         holder.bind(movie)
+        holder.itemView.setOnClickListener{listener(movie,it.movieCover)}
     }
 
    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -56,14 +57,7 @@ class MoviesAdapter() :
                     .into(this)
             }
 
-            llRvItemMovie.setOnClickListener {
-                movieSelectedListener.onMovieSelected(movie, movieImageView)
-            }
         }
     }
 
-    interface MovieSelectedListener {
-        fun onMovieSelected(movie: Movie, imageView: ImageView)
-    }
-    lateinit var movieSelectedListener: MoviesAdapter.MovieSelectedListener
 }
