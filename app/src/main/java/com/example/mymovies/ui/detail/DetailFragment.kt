@@ -30,7 +30,8 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment() : Fragment() {
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel by lazy { getViewModel { component.detaiViewModel } }
+    private lateinit var component: DetailFragmentComponent
     private var binding: FragmentDetailBinding? = null
     private val args: DetailFragmentArgs by navArgs()
     private var valueAnimator:ValueAnimator = ValueAnimator.ofInt()
@@ -68,23 +69,8 @@ class DetailFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = getViewModel {
-            val moviesRepository = MoviesRepository(
-                RoomDataSource(app.db),
-                TheMovieDbDataSource(),
-                RegionRepository(
-                    PlayServicesLocationDataSource(app),
-                    AndroidPermissionChecker(app)
-                ),
-                getString(R.string.api_key)
-            )
 
-            DetailViewModel(
-                args.id,
-                FindMovieById(moviesRepository),
-                ToggleMovieFavorite(moviesRepository)
-            )
-        }
+        component = app.component.plus(DetailFragmentModule(args.id))
 
         binding!!.movieDetailImage.apply {
             transitionName = args.uri

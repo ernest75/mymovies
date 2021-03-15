@@ -30,7 +30,8 @@ import kotlinx.android.synthetic.main.view_movie.*
 
 class MainFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var component: MainFragmentComponent
+    private val viewModel: MainViewModel by lazy { getViewModel { component.mainViewModel } }
     private lateinit var adapter: MoviesAdapter
     private val coarsePermissionRequester by lazy {
         PermissionRequester(
@@ -56,21 +57,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = view.findNavController()
 
-        viewModel = getViewModel {
-            MainViewModel(
-                GetPopularMovies(
-                    MoviesRepository(
-                        RoomDataSource(app.db),
-                        TheMovieDbDataSource(),
-                        RegionRepository(
-                            PlayServicesLocationDataSource(app),
-                            AndroidPermissionChecker(app)
-                        ),
-                        getString(R.string.api_key)
-                    )
-                )
-            )
-        }
+        component = app.component.plus(MainFragmentModule())
 
         viewModel.navigateToMovie.observe(viewLifecycleOwner, EventObserver { navigationEvent ->
             val pass = "https://image.tmdb.org/t/p/w185/${navigationEvent.movie.posterPath}"
