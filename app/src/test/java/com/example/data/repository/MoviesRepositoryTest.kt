@@ -15,8 +15,8 @@ import org.junit.runner.RunWith
 
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import com.nhaarman.mockitokotlin2.any
 
-import org.mockito.ArgumentMatchers.any
 import org.hamcrest.CoreMatchers.`is`
 
 import org.hamcrest.CoreMatchers.*
@@ -24,6 +24,7 @@ import org.mockito.ArgumentMatchers.*
 import org.mockito.Mockito.*
 import org.mockito.ArgumentCaptor.*
 import org.junit.Assert.assertThat
+import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.verify
 import org.mockito.ArgumentMatchers.anyString
 
@@ -70,7 +71,7 @@ class MoviesRepositoryTest {
 
             val remoteMovies = listOf(mockedMovie.copy(2))
             whenever(localDataSource.isEmpty()).thenReturn(true)
-            whenever(remoteDataSource.getPopularMovies(com.nhaarman.mockitokotlin2.any(), com.nhaarman.mockitokotlin2.any())).thenReturn(remoteMovies)
+            whenever(remoteDataSource.getPopularMovies(any(), any())).thenReturn(remoteMovies)
             whenever(regionRepository.findLastRegion()).thenReturn("US")
 
             moviesRepository.getPopularMovies()
@@ -80,8 +81,32 @@ class MoviesRepositoryTest {
         }
     }
 
+    @Test
+    fun `find by id call local data source and finds correct movie`(){
+        runBlocking {
 
+            val movie = mockedMovie.copy(3)
+            whenever(localDataSource.findById(3)).thenReturn(movie)
 
+            val result = moviesRepository.findById(3)
+            assertEquals(result,movie)
+
+        }
+    }
+
+    @Test
+    fun `update updates local data source movie `(){
+        runBlocking {
+
+            val movie = mockedMovie.copy(4)
+
+            moviesRepository.update(movie)
+
+            verify(localDataSource).update(movie)
+        }
+    }
+
+    
     private val mockedMovie = Movie(
         0,
         "Title",
