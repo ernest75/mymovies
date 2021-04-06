@@ -14,6 +14,8 @@ import com.example.mymovies.data.database.RoomDataSource
 import com.example.mymovies.data.server.TheMovieDbDataSource
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -46,5 +48,9 @@ class AppModule {
     @Provides
     fun permissionCheckerProvider(app: Application): PermissionChecker =
         AndroidPermissionChecker(app)
+
+    @Provides
+    @Singleton
+    fun coroutineDispatcher():CoroutineDispatcher = Dispatchers.Main
 
 }

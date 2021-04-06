@@ -7,13 +7,16 @@ import com.example.domain.Movie
 import com.example.mymovies.ui.common.ScopedViewModel
 import com.example.usecases.FindMovieById
 import com.example.usecases.ToggleMovieFavorite
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 class DetailViewModel (private val movieId: Int,
                        private val findMovieById: FindMovieById,
-                       private val toggleMovieFavorite: ToggleMovieFavorite
-) :ScopedViewModel() {
+                       private val toggleMovieFavorite: ToggleMovieFavorite,
+                       uiDispatcher: CoroutineDispatcher
+) :ScopedViewModel(uiDispatcher) {
 
     private val _movie = MutableLiveData<Movie>()
     val movie: LiveData<Movie> get() = _movie

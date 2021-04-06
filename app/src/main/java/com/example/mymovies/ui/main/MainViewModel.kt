@@ -6,9 +6,12 @@ import com.example.domain.Movie
 import com.example.mymovies.ui.common.Event
 import com.example.mymovies.ui.common.ScopedViewModel
 import com.example.usecases.GetPopularMovies
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val getPopularMovies: GetPopularMovies) : ScopedViewModel() {
+class MainViewModel(private val getPopularMovies: GetPopularMovies,
+                    uiDispatcher: CoroutineDispatcher) : ScopedViewModel(uiDispatcher) {
 
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> get() = _movies

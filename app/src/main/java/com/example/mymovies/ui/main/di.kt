@@ -5,12 +5,14 @@ import com.example.usecases.GetPopularMovies
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
+import kotlinx.coroutines.CoroutineDispatcher
 
 @Module
 class MainFragmentModule {
 
     @Provides
-    fun mainViewModelProvider(getPopularMovies: GetPopularMovies) = MainViewModel(getPopularMovies)
+    fun mainViewModelProvider(getPopularMovies: GetPopularMovies, uiDispatcher: CoroutineDispatcher) =
+        MainViewModel(getPopularMovies, uiDispatcher)
 
     @Provides
     fun getPopularMoviesProvider(moviesRepository: MoviesRepository) =

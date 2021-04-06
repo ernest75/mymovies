@@ -6,6 +6,7 @@ import com.example.usecases.ToggleMovieFavorite
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
+import kotlinx.coroutines.CoroutineDispatcher
 
 @Module
 class DetailFragmentModule(private val movieId: Int) {
@@ -14,9 +15,10 @@ class DetailFragmentModule(private val movieId: Int) {
     fun detailViewModelProvider(
 
         findMovieById: FindMovieById,
-        toggleMovieFavorite: ToggleMovieFavorite
+        toggleMovieFavorite: ToggleMovieFavorite,
+        uiDispatcher: CoroutineDispatcher
     ): DetailViewModel {
-        return DetailViewModel(movieId, findMovieById, toggleMovieFavorite)
+        return DetailViewModel(movieId, findMovieById, toggleMovieFavorite,uiDispatcher)
     }
 
     @Provides
