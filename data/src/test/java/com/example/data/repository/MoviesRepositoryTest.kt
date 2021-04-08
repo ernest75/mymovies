@@ -3,6 +3,7 @@ package com.example.data.repository
 import com.example.data.source.LocalDataSource
 import com.example.data.source.RemoteDataSource
 import com.example.domain.Movie
+import com.example.testshared.mockedMovie
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
@@ -105,22 +106,5 @@ class MoviesRepositoryTest {
             verify(localDataSource).update(movie)
         }
     }
-
-    
-    private val mockedMovie = Movie(
-        0,
-        "Title",
-        "Overview",
-        "01/01/2025",
-        "",
-        "",
-        "EN",
-        "Title",
-        5.0,
-        5.1,
-        false
-    )
-
-
 
 }
