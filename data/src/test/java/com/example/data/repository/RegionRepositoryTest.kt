@@ -46,14 +46,14 @@ class RegionRepositoryTest {
 
     @Test
     fun `return default region when permission not granted`(){
-         runBlocking {
+        runBlocking {
 
-             whenever(permissionChecker.check(Permission.COARSE_LOCATION)).thenReturn(false)
+            whenever(permissionChecker.check(Permission.COARSE_LOCATION)).thenReturn(false)
 
-             val region = regionRepository.findLastRegion()
+            val region = regionRepository.findLastRegion()
 
-             assertEquals(RegionRepository.DEFAULT_REGION,region)
-         }
+            assertEquals(RegionRepository.DEFAULT_REGION,region)
+        }
     }
 
     @Test
