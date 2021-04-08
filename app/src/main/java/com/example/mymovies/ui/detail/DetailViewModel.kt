@@ -19,7 +19,11 @@ class DetailViewModel (private val movieId: Int,
 ) :ScopedViewModel(uiDispatcher) {
 
     private val _movie = MutableLiveData<Movie>()
-    val movie: LiveData<Movie> get() = _movie
+    val movie: LiveData<Movie>
+        get() {
+            if (_movie.value == null) findMovie()
+            return _movie
+        }
 
     private val _title = MutableLiveData<String>()
     val title: LiveData<String> get() = _title
@@ -29,13 +33,6 @@ class DetailViewModel (private val movieId: Int,
 
     private val _favorite = MutableLiveData<Boolean>()
     val favorite: LiveData<Boolean> get() = _favorite
-
-    init {
-        launch {
-            _movie.value = findMovieById.invoke(movieId)
-            updateUi()
-        }
-    }
 
     fun onFavoriteClicked() {
         launch {
@@ -47,6 +44,13 @@ class DetailViewModel (private val movieId: Int,
         }
     }
 
+    private fun findMovie() {
+        launch {
+            _movie.value = findMovieById.invoke(movieId)
+            updateUi()
+        }
+    }
+
     private fun updateUi() {
         movie.value?.run {
             _title.value = title
@@ -54,6 +58,5 @@ class DetailViewModel (private val movieId: Int,
             _favorite.value = favorite
         }
     }
-
 
 }
