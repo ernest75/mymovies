@@ -30,6 +30,10 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment() : Fragment() {
 
+    private val START_ANIMATION_POSITION = 0
+    private val END_ANIMATION_POSITION = -1000
+    private val DURATION_ANIMATION = 1200L
+
     private val viewModel by lazy { getViewModel { component.detaiViewModel } }
     private lateinit var component: DetailFragmentComponent
     private var binding: FragmentDetailBinding? = null
@@ -64,7 +68,7 @@ class DetailFragment() : Fragment() {
         binding!!.collapsingBar.setExpandedTitleColor(Color.WHITE)
 
 
-        return binding?.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,7 +83,11 @@ class DetailFragment() : Fragment() {
                 .into(this)
         }
 
-        animateCollapsingAppBar(0,-1000,1200)
+        animateCollapsingAppBar(START_ANIMATION_POSITION,END_ANIMATION_POSITION,DURATION_ANIMATION)
+
+        binding!!.appBarLayout.setOnClickListener {
+            valueAnimator.cancel()
+        }
 
         binding?.apply {
             viewmodel = viewModel
