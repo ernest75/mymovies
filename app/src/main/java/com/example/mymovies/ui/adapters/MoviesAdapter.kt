@@ -45,8 +45,6 @@ class MoviesAdapter(private val listener: (Movie, ImageView) -> Unit) :
     }
 
    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val movieImageView:ImageView = itemView.movieCover
-        private val llRvItemMovie :LinearLayout = itemView.ll_movie_view_rv
 
         fun bind(movie: Movie) {
             itemView.movieTitle.text = movie.title
