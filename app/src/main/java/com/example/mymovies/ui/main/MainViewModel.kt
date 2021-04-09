@@ -23,14 +23,16 @@ class MainViewModel(private val getPopularMovies: GetPopularMovies,
     val navigateToMovie: LiveData<Event<NavigateEvent>> get() = _navigateToMovie
 
     private val _requestLocationPermission = MutableLiveData<Event<Unit>>()
-    val requestLocationPermission: LiveData<Event<Unit>> get() = _requestLocationPermission
+    val requestLocationPermission: LiveData<Event<Unit>> get() {
+        if(_requestLocationPermission.value == null) refresh()
+        return _requestLocationPermission
+    }
 
     init {
         initScope()
-        refresh()
     }
 
-  private fun refresh() {
+  fun refresh() {
       _requestLocationPermission.value = Event(Unit)
     }
 
