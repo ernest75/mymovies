@@ -71,7 +71,8 @@ allprojects {
         ]
 
         compileOnlyLibs = [
-                javaAnnotatopn  :'javax.annotation:jsr250-api:1.0'
+                    javaAnnotatopn  :'javax.annotation:jsr250-api:1.0',
+                    fixForBuildAndroidAndDaggerJdk9plus : 'com.github.pengrad:jdk9-deps:1.0'
         ]
 
         testLibs = [
