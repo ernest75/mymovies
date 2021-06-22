@@ -37,7 +37,7 @@ inline fun <reified T : Activity> Context.startActivity(body: Intent.() -> Unit)
 }
 
 inline fun <reified T : ViewModel> Fragment.getViewModel(): T {
-    return ViewModelProviders.of(this)[T::class.java]
+    return ViewModelProvider(this)[T::class.java]
 }
 
 @Suppress("UNCHECKED_CAST")

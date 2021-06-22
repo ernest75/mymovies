@@ -34,8 +34,7 @@ class DetailFragment() : Fragment() {
     private val END_ANIMATION_POSITION = -1000
     private val DURATION_ANIMATION = 1200L
 
-    private val viewModel by lazy { getViewModel { component.detaiViewModel } }
-    private lateinit var component: DetailFragmentComponent
+    private val viewModel :DetailViewModel =  getViewModel()
     private var binding: FragmentDetailBinding? = null
     private val args: DetailFragmentArgs by navArgs()
     private var valueAnimator:ValueAnimator = ValueAnimator.ofInt()
@@ -73,8 +72,6 @@ class DetailFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        component = app.component.plus(DetailFragmentModule(args.id))
 
         binding!!.movieDetailImage.apply {
             transitionName = args.uri

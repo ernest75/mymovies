@@ -14,9 +14,8 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel (private val movieId: Int,
                        private val findMovieById: FindMovieById,
-                       private val toggleMovieFavorite: ToggleMovieFavorite,
-                       uiDispatcher: CoroutineDispatcher
-) :ScopedViewModel(uiDispatcher) {
+                       private val toggleMovieFavorite: ToggleMovieFavorite
+) :ScopedViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
     val movie: LiveData<Movie>

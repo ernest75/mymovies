@@ -10,8 +10,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val getPopularMovies: GetPopularMovies,
-                    uiDispatcher: CoroutineDispatcher) : ScopedViewModel(uiDispatcher) {
+class MainViewModel(private val getPopularMovies: GetPopularMovies) : ScopedViewModel() {
 
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> get() = _movies

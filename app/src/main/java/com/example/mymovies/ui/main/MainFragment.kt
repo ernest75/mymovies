@@ -2,36 +2,30 @@ package com.example.mymovies.ui.main
 
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
-import com.example.data.repository.MoviesRepository
-import com.example.data.repository.RegionRepository
-import com.example.domain.Movie
 import com.example.mymovies.R
-import com.example.mymovies.data.AndroidPermissionChecker
-import com.example.mymovies.data.PlayServicesLocationDataSource
-
-import com.example.mymovies.data.database.RoomDataSource
-import com.example.mymovies.data.server.TheMovieDbDataSource
 import com.example.mymovies.databinding.FragmentMainBinding
 import com.example.mymovies.ui.adapters.MoviesAdapter
 import com.example.mymovies.ui.common.*
 import com.example.usecases.GetPopularMovies
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.view_movie.*
+import org.koin.android.ext.android.inject
 
 class MainFragment : Fragment() {
 
-    private lateinit var component: MainFragmentComponent
-    private val viewModel: MainViewModel by lazy { getViewModel { component.mainViewModel } }
+    private val viewModel: MainViewModel = getViewModel()
     private lateinit var adapter: MoviesAdapter
     private val coarsePermissionRequester by lazy {
         PermissionRequester(
@@ -42,6 +36,7 @@ class MainFragment : Fragment() {
 
     private lateinit var navController: NavController
     private var binding: FragmentMainBinding? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,8 +51,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = view.findNavController()
-
-        component = app.component.plus(MainFragmentModule())
 
         viewModel.navigateToMovie.observe(viewLifecycleOwner, EventObserver { navigationEvent ->
             val pass = "https://image.tmdb.org/t/p/w185/${navigationEvent.movie.posterPath}"

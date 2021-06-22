@@ -5,22 +5,20 @@ import kotlin.coroutines.CoroutineContext
 
 interface Scope: CoroutineScope {
 
-    class Impl(override val uiDispatcher: CoroutineDispatcher) : Scope{
+    class Impl : Scope {
         override lateinit var job: Job
     }
 
     var job: Job
-    val uiDispatcher:CoroutineDispatcher
-
     override val coroutineContext: CoroutineContext
-        get() = uiDispatcher + job
+        get() = Dispatchers.Main + job
 
     fun initScope() {
         job = SupervisorJob()
     }
 
     fun destroyScope() {
-        job.cancel() // Cancel job on activity destroy. After destroy all children jobs will be cancelled automatically
+        job.cancel()
     }
 
 
