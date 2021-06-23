@@ -1,52 +1,47 @@
 package com.example.mymovies.ui.main
-import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.domain.Movie
-import com.example.mymovies.ui.common.Event
 import com.example.mymovies.ui.common.ScopedViewModel
 import com.example.usecases.GetPopularMovies
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val getPopularMovies: GetPopularMovies,
-                    uiDispatcher: CoroutineDispatcher) : ScopedViewModel(uiDispatcher) {
+                    uiDispatcher: CoroutineDispatcher)
+    : ScopedViewModel(uiDispatcher) {
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> get() = _movies
+    private val _model = MutableLiveData<UiModel>()
+    val model: LiveData<UiModel>
+        get() {
+            if (_model.value == null) refresh()
+            return _model
+        }
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> get() = _loading
-
-    private val _navigateToMovie = MutableLiveData<Event<NavigateEvent>>()
-    val navigateToMovie: LiveData<Event<NavigateEvent>> get() = _navigateToMovie
-
-    private val _requestLocationPermission = MutableLiveData<Event<Unit>>()
-    val requestLocationPermission: LiveData<Event<Unit>> get() {
-        if(_requestLocationPermission.value == null) refresh()
-        return _requestLocationPermission
+    sealed class UiModel {
+        object Loading : UiModel()
+        data class Content(val movies: List<Movie>) : UiModel()
+        data class Navigation(val movie: Movie) : UiModel()
+        object RequestLocationPermission : UiModel()
     }
-
     init {
         initScope()
     }
 
-  fun refresh() {
-      _requestLocationPermission.value = Event(Unit)
+  private fun refresh() {
+      _model.value = UiModel.RequestLocationPermission
     }
 
     fun onCoarsePermissionRequested() {
         launch {
-            _loading.value = true
-            _movies.value = getPopularMovies.invoke()
-            _loading.value = false
+            _model.value = UiModel.Loading
+            _model.value = UiModel.Content(getPopularMovies.invoke())
         }
 
     }
 
-    fun onMovieClicked(movie: Movie, imageView: ImageView) {
-        _navigateToMovie.value = Event(NavigateEvent(movie,imageView))
+    fun onMovieClicked(movie: Movie) {
+        _model.value = UiModel.Navigation(movie)
     }
 
     override fun onCleared() {
@@ -54,7 +49,5 @@ class MainViewModel(private val getPopularMovies: GetPopularMovies,
         super.onCleared()
     }
 
-
 }
 
-data class NavigateEvent (val movie: Movie,val imageView: ImageView)

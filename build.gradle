@@ -11,6 +11,7 @@ buildscript {
     ext.dexter = "5.0.0"
     ext.timber = "4.7.1"
     ext.dagger = "2.29.1"
+    ext.koin = "2.2.2"
     repositories {
         google()
         jcenter()
@@ -67,7 +68,8 @@ allprojects {
                 retrofitGsonConverter    : "com.squareup.retrofit2:converter-gson:$retrofit",
                 dagger                   : "com.google.dagger:dagger:$dagger",
                 timber                   : "com.jakewharton.timber:timber:$timber",
-                retroCoroutAdapter       : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_retrofit_adapter"
+                retroCoroutAdapter       : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_retrofit_adapter",
+                koin                     : "org.koin:koin-androidx-viewmodel:$koin"
         ]
 
         compileOnlyLibs = [
