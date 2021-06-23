@@ -11,9 +11,6 @@ import timber.log.Timber
 
 class MoviesApp : Application() {
 
-    lateinit var db: MovieDatabase
-        private set
-
     lateinit var component: MyMoviesComponent
         private set
     
