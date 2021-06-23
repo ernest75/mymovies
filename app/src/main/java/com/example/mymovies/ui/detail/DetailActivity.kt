@@ -11,6 +11,9 @@ import androidx.lifecycle.Observer
 import com.example.mymovies.R
 import com.example.mymovies.databinding.ActivityDetailBinding
 import com.example.mymovies.ui.common.*
+import com.example.mymovies.ui.detail.DetailActivity.AnimationConstants.DURATION_ANIMATION
+import com.example.mymovies.ui.detail.DetailActivity.AnimationConstants.END_ANIMATION_POSITION
+import com.example.mymovies.ui.detail.DetailActivity.AnimationConstants.START_ANIMATION_POSITION
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.androidx.scope.ScopeActivity
@@ -23,9 +26,12 @@ class DetailActivity : ScopeActivity()  {
         const val MOVIE = "DetailActivity:movie"
     }
 
-    private val START_ANIMATION_POSITION = 0
-    private val END_ANIMATION_POSITION = -1000
-    private val DURATION_ANIMATION = 1200L
+    object AnimationConstants{
+        const val START_ANIMATION_POSITION = 0
+        const val END_ANIMATION_POSITION = -1000
+        const val DURATION_ANIMATION = 1200L
+    }
+
     private var valueAnimator:ValueAnimator = ValueAnimator.ofInt()
 
     private val viewModel: DetailViewModel by inject{
