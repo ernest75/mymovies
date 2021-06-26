@@ -11,5 +11,5 @@ data class Movie(
     val originalTitle: String,
     val popularity: Double,
     val voteAverage: Double,
-    var favorite: Boolean
+    val favorite: Boolean
 )

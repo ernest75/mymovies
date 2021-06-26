@@ -28,7 +28,7 @@ private val mockedAppModule = module {
     single { Dispatchers.Unconfined }
 }
 
-var defaultFakeMovies = listOf(
+var defaultFakeMovies = mutableListOf(
     mockedMovie.copy(1),
     mockedMovie.copy(2),
     mockedMovie.copy(3),

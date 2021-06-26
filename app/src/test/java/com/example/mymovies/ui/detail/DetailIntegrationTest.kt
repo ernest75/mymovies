@@ -5,14 +5,15 @@ import androidx.lifecycle.Observer
 import com.example.data.source.LocalDataSource
 import com.example.mymovies.ui.FakeLocalDataSource
 import com.example.mymovies.ui.defaultFakeMovies
-import com.example.mymovies.ui.detail.DetailViewModel.*
+import com.example.mymovies.ui.detail.DetailViewModel.UiModel
 import com.example.mymovies.ui.initMockedDi
 import com.example.testshared.mockedMovie
+import com.example.testshared.mockedMovieFavourite
 import com.example.usecases.FindMovieById
 import com.example.usecases.ToggleMovieFavorite
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertFalse
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -52,6 +53,11 @@ class DetailIntegrationTest : AutoCloseKoinTest() {
         localDataSource.movies = defaultFakeMovies
     }
 
+    @After
+    fun tearDown(){
+        defaultFakeMovies.set(0,mockedMovie.copy(1))
+    }
+
     @Test
     fun `observing LiveData finds the movie`() {
 
@@ -77,11 +83,11 @@ class DetailIntegrationTest : AutoCloseKoinTest() {
     fun `favorite is deleted in local data source`() {
         vm.model.observeForever(observer)
 
-        defaultFakeMovies.find { it.id==1 }!!.favorite = true
+        defaultFakeMovies.set(0,mockedMovieFavourite.copy(1))
 
         runBlocking {
             vm.onFavoriteClicked()
-            assertFalse(localDataSource.findById(1).favorite)
+            assertTrue(localDataSource.findById(1).favorite)
         }
 
     }
