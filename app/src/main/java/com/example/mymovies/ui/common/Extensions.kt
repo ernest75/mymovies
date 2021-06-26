@@ -7,12 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -77,8 +73,3 @@ val Fragment.app: MoviesApp
         ?: IllegalStateException("Fragment needs to be attach to the activity to access the App instance"))
             as MoviesApp
 
-fun <T : ViewDataBinding> ViewGroup.bindingInflate(
-    @LayoutRes layoutRes: Int,
-    attachToRoot: Boolean = true
-): T =
-    DataBindingUtil.inflate(LayoutInflater.from(context), layoutRes, this, attachToRoot)

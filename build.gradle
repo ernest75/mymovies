@@ -10,7 +10,6 @@ buildscript {
     ext.glide = "4.9.0"
     ext.dexter = "5.0.0"
     ext.timber = "4.7.1"
-    ext.dagger = "2.29.1"
     ext.koin = "2.2.2"
     repositories {
         google()
@@ -53,7 +52,6 @@ allprojects {
         androidKaptLibs = [
                 roomCompiler : "androidx.room:room-compiler:$room",
                 glideCompiler: "com.github.bumptech.glide:compiler:$glide",
-                daggerCompiler: "com.google.dagger:dagger-compiler:$dagger",
                 roomArchCompler:"android.arch.persistence.room:compiler:$room"
         ]
 
@@ -66,7 +64,6 @@ allprojects {
                 okhttpLoginInterceptor   : "com.squareup.okhttp3:logging-interceptor:$logging_interceptor",
                 retrofit                 : "com.squareup.retrofit2:retrofit:$retrofit",
                 retrofitGsonConverter    : "com.squareup.retrofit2:converter-gson:$retrofit",
-                dagger                   : "com.google.dagger:dagger:$dagger",
                 timber                   : "com.jakewharton.timber:timber:$timber",
                 retroCoroutAdapter       : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutines_retrofit_adapter",
                 koin                     : "org.koin:koin-androidx-viewmodel:$koin"
@@ -81,6 +78,8 @@ allprojects {
                 junit        : 'junit:junit:4.13.1',
                 mockitoKotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
                 mockitoInline: "org.mockito:mockito-inline:2.28.2",
+                mockitoKotlin: "org.mockito.kotlin:mockito-kotlin:3.2.0",
+                koinTest     : 'org.koin:koin-test:2.2.0-rc-4',
                 testShared: project(':testShared')
         ]
 
@@ -89,8 +88,13 @@ allprojects {
         ]
 
         androidTestLibs = [
-                testRunner: 'androidx.test:runner:1.3.0',
-                espresso  : 'androidx.test.espresso:espresso-core:3.3.0'
+                testRunner   : 'androidx.test:runner:1.3.0',
+                espresso     : 'androidx.test.espresso:espresso-contrib:3.3.0',
+                rules        : 'androidx.test:rules:1.3.0',
+                extJunit     : 'androidx.test.ext:junit-ktx:1.1.2',
+                koinTest     : 'org.koin:koin-test:2.2.0-rc-4',
+                mockWebServer: 'com.squareup.okhttp3:mockwebserver:4.9.0',
+                okhttpIdling : 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
         ]
     }
 }

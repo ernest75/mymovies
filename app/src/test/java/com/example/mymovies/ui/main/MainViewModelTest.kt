@@ -2,11 +2,8 @@ package com.example.mymovies.ui.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.mymovies.ui.common.Event
 import com.example.testshared.mockedMovie
 import com.example.usecases.GetPopularMovies
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -14,8 +11,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.isNull
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 
 @RunWith(MockitoJUnitRunner::class)
@@ -41,20 +40,20 @@ class MainViewModelTest {
     @Test
     fun `on launched location permission requested`(){
 
-        vm.requestLocationPermission.observeForever(observer)
+        vm.model.observeForever(observer)
 
-        verify(observer).onChanged(vm.requestLocationPermission.value)
+        verify(observer).onChanged(vm.model.value)
 
     }
 
     @Test
     fun `after requesting the permission loading is shown`(){
         runBlocking {
-            vm.loading.observeForever(observer)
+            vm.model.observeForever(observer)
 
             vm.onCoarsePermissionRequested()
 
-            verify(observer).onChanged(true)
+            verify(observer).onChanged(MainViewModel.UiModel.Loading)
         }
     }
 
@@ -63,11 +62,11 @@ class MainViewModelTest {
         runBlocking {
             val movies = listOf(mockedMovie.copy(id = 1))
             whenever(getPopularMovies.invoke()).thenReturn(movies)
-            vm.movies.observeForever(observer)
+            vm.model.observeForever(observer)
 
             vm.onCoarsePermissionRequested()
 
-            verify(observer).onChanged(movies)
+            verify(observer).onChanged(MainViewModel.UiModel.Content(movies))
 
         }
     }
@@ -75,13 +74,18 @@ class MainViewModelTest {
     @Test
     fun `after getting popular movies loading is hide`(){
         runBlocking {
-            vm.loading.observeForever(observer)
+            val movies = listOf(mockedMovie.copy(id = 1))
+            whenever(getPopularMovies.invoke()).thenReturn(movies)
+            vm.model.observeForever(observer)
 
             vm.onCoarsePermissionRequested()
 
-            verify(observer).onChanged(false)
+            verify(observer).onChanged(MainViewModel.UiModel.Content(movies))
 
         }
     }
+
+
+
     
 }

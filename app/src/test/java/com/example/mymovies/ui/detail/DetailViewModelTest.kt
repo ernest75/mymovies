@@ -2,36 +2,20 @@ package com.example.mymovies.ui.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.domain.Movie
 import com.example.testshared.mockedMovie
 import com.example.usecases.FindMovieById
 import com.example.usecases.ToggleMovieFavorite
-import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
-
-import org.hamcrest.CoreMatchers
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
-
-import org.mockito.ArgumentMatchers.any
-import org.hamcrest.CoreMatchers.`is`
-
-import org.hamcrest.CoreMatchers.*
-import org.mockito.ArgumentMatchers.*
-import org.mockito.Mockito.*
-import org.mockito.ArgumentCaptor.*
-import org.junit.Assert.assertThat
-import org.junit.Rule
 import org.mockito.Mockito.verify
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.whenever
 
 
 @RunWith(MockitoJUnitRunner::class)
@@ -66,9 +50,9 @@ class DetailViewModelTest {
 
             whenever(findMovieById.invoke(1)).thenReturn(movie)
 
-            vm.movie.observeForever(observer)
+            vm.model.observeForever(observer)
 
-            verify(observer).onChanged(movie)
+            verify(observer).onChanged(DetailViewModel.UiModel(movie))
         }
     }
 
@@ -79,7 +63,7 @@ class DetailViewModelTest {
             whenever(findMovieById.invoke(1)).thenReturn(movie)
             whenever(toogleMovieFavorite.invoke(movie)).thenReturn(movie.copy(favorite = !movie.favorite))
 
-            vm.movie.observeForever(observer)
+            vm.model.observeForever(observer)
             vm.onFavoriteClicked()
 
             verify(toogleMovieFavorite).invoke(movie)
@@ -94,7 +78,7 @@ class DetailViewModelTest {
             whenever(findMovieById.invoke(1)).thenReturn(movie)
             whenever(toogleMovieFavorite.invoke(movie)).thenReturn(movie.copy(favorite = !movie.favorite))
 
-            vm.movie.observeForever(observer)
+            vm.model.observeForever(observer)
             vm.onFavoriteClicked()
 
             assertEquals(movie.favorite,favorite)
