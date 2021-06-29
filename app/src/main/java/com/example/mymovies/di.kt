@@ -56,7 +56,7 @@ val dataModule = module {
     factory { MoviesRepository(get(), get(), get(), get(named("apiKey"))) }
 }
 
-private val scopesModule = module {
+val scopesModule = module {
     scope(named<MainActivity>()) {
         viewModel { MainViewModel(get(), get()) }
         scoped { GetPopularMovies(get()) }
