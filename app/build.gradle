@@ -1,8 +1,10 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
+plugins{
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+}
 
 android {
     compileSdkVersion 30
@@ -54,6 +56,8 @@ dependencies {
     implementation libs.values()
     kapt androidKaptLibs.values()
     compileOnly compileOnlyLibs.values()
+    implementation platform('com.google.firebase:firebase-bom:28.2.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     testImplementation testLibs.values()
     testImplementation androidxTestLibs.values()
