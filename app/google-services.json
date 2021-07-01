@@ -1,0 +1,328 @@
+{
+  "project_info": {
+    "project_number": "220007971382",
+    "firebase_url": "https://fir-udemy-55562.firebaseio.com",
+    "project_id": "fir-udemy-55562",
+    "storage_bucket": "fir-udemy-55562.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:0b261d61fdde66b0",
+        "android_client_info": {
+          "package_name": "com.example.ernestschneiderolcina.firebaseudemy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-occrvkthhsui77sngj52o943r54mhpm0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ernestschneiderolcina.firebaseudemy",
+            "certificate_hash": "c296bb2b0b3b9e605bae5e3d27a1e8f42c65cf36"
+          }
+        },
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:ace901818cb3c3c7",
+        "android_client_info": {
+          "package_name": "com.example.ernestschneiderolcina.menudecomidas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-jbrra77i46rj795nohenqi1odbrjti7v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ernestschneiderolcina.menudecomidas",
+            "certificate_hash": "c296bb2b0b3b9e605bae5e3d27a1e8f42c65cf36"
+          }
+        },
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:cc85cbbd28e74382",
+        "android_client_info": {
+          "package_name": "com.example.ernestschneiderolcina.misfotografias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-a7olgca4c0nscobufcc9hlm5uvmraslb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ernestschneiderolcina.misfotografias",
+            "certificate_hash": "c296bb2b0b3b9e605bae5e3d27a1e8f42c65cf36"
+          }
+        },
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:40a669cee5348629",
+        "android_client_info": {
+          "package_name": "com.example.ernestschneiderolcina.multilogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-prn2ugnlfuir3vvi0elp0r2aaa7okp1r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ernestschneiderolcina.multilogin",
+            "certificate_hash": "c296bb2b0b3b9e605bae5e3d27a1e8f42c65cf36"
+          }
+        },
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:e30849cef18ee83b",
+        "android_client_info": {
+          "package_name": "com.example.ernestschneiderolcina.ofertas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-nokhor4se1sq8246tkf0ksf86504kbpq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ernestschneiderolcina.ofertas",
+            "certificate_hash": "c296bb2b0b3b9e605bae5e3d27a1e8f42c65cf36"
+          }
+        },
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:674be761d0418c5e6fb697",
+        "android_client_info": {
+          "package_name": "com.example.espressouicodingwithmitch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:9c06eeebb1f43fb7",
+        "android_client_info": {
+          "package_name": "com.example.inventario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-mcm6jqg7b0b1su6vs2i62gufkrsug2lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.inventario",
+            "certificate_hash": "c296bb2b0b3b9e605bae5e3d27a1e8f42c65cf36"
+          }
+        },
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:c32799bc2898e5fa6fb697",
+        "android_client_info": {
+          "package_name": "com.example.mymovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220007971382:android:4573579e80386578",
+        "android_client_info": {
+          "package_name": "com.example.soportetcnico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220007971382-d7mpc3bmk66s53ec1753r47henq6d34c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soportetcnico",
+            "certificate_hash": "c296bb2b0b3b9e605bae5e3d27a1e8f42c65cf36"
+          }
+        },
+        {
+          "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJspHX6DHWXBhgoxs8UxRll6rcJ84XN9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220007971382-budden0imsq1tgk171f5f74n1da4avoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
