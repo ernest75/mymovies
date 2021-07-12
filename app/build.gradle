@@ -40,7 +40,6 @@ testOptions {
 }
 
 testOptions.unitTests.all {
-    //useJUnitPlatform()
     testLogging {
         events 'passed', 'failed', 'skipped', 'standardOut', 'standardError'
     }
