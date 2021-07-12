@@ -29,15 +29,22 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    buildFeatures {
-        viewBinding true
-    }
+    jvmTarget = '1.8'
+}
+buildFeatures {
+    viewBinding true
+}
 
-    testOptions {
-        animationsDisabled = true
+testOptions {
+    animationsDisabled = true
+}
+
+testOptions.unitTests.all {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'failed', 'skipped', 'standardOut', 'standardError'
     }
+}
 }
 
 androidExtensions {
