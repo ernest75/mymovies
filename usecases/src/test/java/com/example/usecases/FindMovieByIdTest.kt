@@ -1,29 +1,14 @@
 package com.example.usecases
 
 import com.example.data.repository.MoviesRepository
-import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
-
-import org.hamcrest.CoreMatchers
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-
-import org.mockito.ArgumentMatchers.any
-import org.hamcrest.CoreMatchers.`is`
-
-import org.hamcrest.CoreMatchers.*
-import org.mockito.ArgumentMatchers.*
-import org.mockito.Mockito.*
-import org.mockito.ArgumentCaptor.*
-import org.junit.Assert.assertThat
-import org.mockito.Mockito.verify
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
 class FindMovieByIdTest {

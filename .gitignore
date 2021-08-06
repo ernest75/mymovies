@@ -80,6 +80,9 @@ fastlane/readme.md
 # Version control
 vcs.xml
 
+# Api keys folder
+app/src/main/cpp/api-keys.cpp
+
 # lint
 lint/intermediates/
 lint/generated/
