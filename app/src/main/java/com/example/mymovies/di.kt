@@ -23,7 +23,6 @@ import com.example.usecases.ToggleMovieFavorite
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -40,7 +39,7 @@ fun Application.initDI() {
 }
 
 private val appModule = module {
-    single(named("apiKey")) { androidApplication().getString(R.string.api_key) }
+    single(named("apiKey")) { ApiKeyRetriever.getMoviesApiKey() }
     single { MovieDatabase.build(get()) }
     factory<LocalDataSource> { RoomDataSource(get()) }
     factory<RemoteDataSource> { TheMovieDbDataSource(get()) }
